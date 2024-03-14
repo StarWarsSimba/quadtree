@@ -142,9 +142,9 @@ def build_quad_tree(grid: list[list[str]], row_l: int, col_l: int, size: int) ->
         else:
             return WHITE_NODE
     else:
-        if all_same(grid, row_l, col_l, size, BLACK_PIXEL):
+        if all_match(grid, row_l, col_l, size, BLACK_PIXEL):
             return BLACK_NODE
-        elif all_same(grid, row_l, col_l, size, WHITE_PIXEL):
+        elif all_match(grid, row_l, col_l, size, WHITE_PIXEL):
             return WHITE_NODE
         else:
             half_size = size // 2
@@ -154,9 +154,11 @@ def build_quad_tree(grid: list[list[str]], row_l: int, col_l: int, size: int) ->
                             build_quad_tree(grid, row_l + half_size, col_l, half_size))
 
 
-def all_same(grid: list[list[str]],
-                row_l: int, col_l: int,
-                size: int, check_color: str) -> bool:
+def all_match(grid: list[list[str]],
+              row_l: int, col_l: int,
+              size: int, check_color: str) -> bool:
+    """Checks if all of a grid's elements are equal to check_color.
+    """
     for row in range(row_l, row_l + size):
         for col in range(col_l, col_l + size):
             if grid[row][col] != check_color:
